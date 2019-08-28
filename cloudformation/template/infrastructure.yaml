@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+Description: Sample project deployed with CI/CD pipeline powered by Jenkins Server on EC2
+
+Resources:
+  GreetingsApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: Basic AWS Api Gateway
+      StageName: Staging
+
+  GreetingsLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.6
+      CodeUri: ../../src/lambdas/greetings_lambda
+      Description: A starter AWS Lambda function.
+      MemorySize: 128
+      Timeout: 10
+      Events:
+        HelloWorldApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref GreetingsApi
+            Path: /greetings
+            Method: GET
+
+Outputs:
+  GreetingsResourceURL:
+    Description: URL to interact with Greetings resource
+    Value:
+      Fn::Sub: https://${GreetingsApi}.execute-api.${AWS::Region}.amazonaws.com/Staging/greetings/

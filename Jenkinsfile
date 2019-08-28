@@ -7,12 +7,6 @@ pipeline {
   }
   stages {
     stage('Build') {
-      agent {
-        node {
-          label 'my-label'
-        }
-
-      }
       steps {
         sh '''echo "Build stage started"
 echo "working path: $(pwd)"

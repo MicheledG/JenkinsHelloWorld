@@ -8,12 +8,17 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''echo "Build stage started"
-echo "working path: $(pwd)"
-echo "working folder content"
-ls -la
-
-aws cloudformation list-stacks'''
+        sh 'sh ./scripts/build/script.sh'
+      }
+    }
+    stage('Package') {
+      steps {
+        sh 'sh ./scripts/package/script.sh'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        sh 'sh ./scripts/deploy/script.sh'
       }
     }
   }

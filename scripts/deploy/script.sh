@@ -29,8 +29,22 @@ aws cloudformation create-change-set \
   --change-set-type ${change_set_type}
 
 echo "Execute change set for AWS CloudFormation stack"
-aws cloudformation execute-change-set \
-  --change-set-name ${jenkins_change_set_name} \
-  --stack-name ${jenkins_stack_name}
+successful_execution=1
+retries=10
+while [[ ${successful_execution} -ne 0 ]]
+do
+  aws cloudformation execute-change-set \
+    --change-set-name ${jenkins_change_set_name} \
+    --stack-name ${jenkins_stack_name} >> /dev/null
+  successful_execution=${?}
+  if [[ ${successful_execution} -ne 0 ]]
+  then
+    echo "Impossible to execute change set, left retries: ${retries}"
+    sleep 30
+    retries="$((${retries}-1))"
+  fi
+done
+
+
 
 echo "Deploy script completed"

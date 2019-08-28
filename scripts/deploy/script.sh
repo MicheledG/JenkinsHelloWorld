@@ -24,7 +24,7 @@ fi
 echo "Create change set for AWS CloudFormation stack"
 aws cloudformation create-change-set \
   --stack-name ${jenkins_stack_name} \
-  --template-url s3://${JENKINS_BUCKET}/packagedTemplate/infrastructurePackaged.yaml \
+  --template-url https://${JENKINS_BUCKET}.s3-${AWS_DEFAULT_REGION}.amazonaws.com/packagedTemplate/infrastructurePackaged.yaml \
   --change-set-name ${jenkins_change_set_name} \
   --change-set-type ${change_set_type}
 

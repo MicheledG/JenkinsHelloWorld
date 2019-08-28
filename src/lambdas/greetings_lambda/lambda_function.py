@@ -3,7 +3,7 @@ from random import choice
 import json
 
 logger = getLogger()
-logger.setLevel(IndentationError)
+logger.setLevel(INFO)
 
 GREETINGS_DATABASE = [
     "hi",

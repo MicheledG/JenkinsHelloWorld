@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 echo "Package script started"
+echo "Working directory: $(pwd)"
+echo "Directory content:"
+ls -la
 
 echo "Create AWS CloudFormation package"
 aws cloudformation package \

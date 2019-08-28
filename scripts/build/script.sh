@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-echo "This is a sample build script, you can do whatever you want!"
+echo "Build script started"
+echo "Working directory: $(pwd)"
+echo "Directory content:"
+ls -la
+echo "Do whatever you want!"
+echo "Build script completed"

@@ -6,8 +6,10 @@ echo "Directory content:"
 ls -la
 
 echo "Create AWS CloudFormation package"
+cd ./cloudformation/template
+
 aws cloudformation package \
-  --template-file cloudformation/template/infrastructure.yaml \
+  --template-file infrastructure.yaml \
   --s3-bucket ${JENKINS_BUCKET} \
   --s3-prefix data-artifacts \
   --output-template-file infrastructurePackaged.yaml \

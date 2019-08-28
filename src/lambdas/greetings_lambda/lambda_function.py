@@ -28,6 +28,7 @@ def lambda_handler(event, context):
     random_greeting = choice(GREETINGS_DATABASE)
     logger.info("Chosen greeting: %s", random_greeting)
     response = {
-        "randomGreeting": random_greeting,
+        "statusCode": 200,
+        "body": json.dumps({"randomGreeting": random_greeting}),
     }
-    return json.dumps(response, indent=2)
+    return response

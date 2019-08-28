@@ -32,7 +32,7 @@ aws cloudformation create-change-set \
 echo "Execute change set for AWS CloudFormation stack"
 successful_execution=1
 retries=10
-while [[ ${successful_execution} -ne 0 -a ${retries} -gt 0 ]]
+while [[ ${successful_execution} -ne 0 && ${retries} -gt 0 ]]
 do
   aws cloudformation execute-change-set \
     --change-set-name ${jenkins_change_set_name} \

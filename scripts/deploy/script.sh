@@ -8,11 +8,25 @@ ls -la
 jenkins_stack_name=jenkins-hello-world
 jenkins_change_set_name=jenkins-hello-world-change-set
 
+
+echo "Check if the cloudformation stack already exists"
+aws cloudformation describe-stacks \
+  --stack-name ${jenkins_stack_name} >> /dev/null
+if [[ ${?} -eq 0 ]]
+then
+  echo "Stack ${jenkins_stack_name} does not exist yet"
+  change_set_type=UPDATE
+else
+  echo "Stack ${jenkins_stack_name} does not exist yet"
+  change_set_type=CREATE
+fi
+
 echo "Create change set for AWS CloudFormation stack"
 aws cloudformation create-change-set \
   --stack-name ${jenkins_stack_name} \
   --template-url s3://${JENKINS_BUCKET}/packagedTemplate/infrastructurePackaged.yaml \
-  --change-set-name ${jenkins_change_set_name}
+  --change-set-name ${jenkins_change_set_name} \
+  --change-set-type ${change_set_type}
 
 echo "Execute change set for AWS CloudFormation stack"
 aws cloudformation execute-change-set \

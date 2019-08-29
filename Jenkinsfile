@@ -18,8 +18,8 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'sh ./scripts/deploy/script.sh'
         input 'Manually start deploy'
+        sh 'sh ./scripts/deploy/script.sh'
       }
     }
   }

@@ -14,12 +14,12 @@ pipeline {
     stage('Package') {
       steps {
         sh 'sh ./scripts/package/script.sh'
-        input 'Start Deploy'
       }
     }
     stage('Deploy') {
       steps {
         sh 'sh ./scripts/deploy/script.sh'
+        input 'Manually start deploy'
       }
     }
   }

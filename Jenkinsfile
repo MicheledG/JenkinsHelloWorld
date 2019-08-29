@@ -14,6 +14,7 @@ pipeline {
     stage('Package') {
       steps {
         sh 'sh ./scripts/package/script.sh'
+        input 'Start Deploy'
       }
     }
     stage('Deploy') {

@@ -13,6 +13,10 @@ GREETINGS_DATABASE = [
     "good evening",
     "good night",
     "bye",
+    "ciao",
+    "buongiorno",
+    "buonasera",
+    "buonanotte",
 ]
 
 

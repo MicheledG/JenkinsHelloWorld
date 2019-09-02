@@ -9,6 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'sh ./scripts/build/script.sh'
+        copyArtifacts 'tt'
       }
     }
     stage('Package') {
